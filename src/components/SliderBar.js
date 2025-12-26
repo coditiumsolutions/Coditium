@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, IconButton, Typography, Button, Fade, Grid } from '@mui/material';
+import { Box, IconButton, Typography, Fade, Grid } from '@mui/material';
 import {
   KeyboardArrowLeft,
   KeyboardArrowRight,
@@ -13,12 +13,12 @@ const SliderBar = () => {
   
   const slides = [
     {
-      title: "Beautiful Design Solutions",
-      subtitle: "Creating stunning experiences that captivate and inspire",
-      description: "We specialize in creating visually appealing and user-friendly designs that enhance user engagement and drive business growth.",
+      title: "Property Management System",
+      subtitle: "Everything You Need in One Platform",
+      description: "Streamline your entire property business operations with a comprehensive platform designed for reliability, efficiency, and seamless user experience.",
       image: {
-        src: "/slider01.png",
-        alt: "Design Solutions",
+        src: "/sliderpms.jpg",
+        alt: "Property Management System",
         width: "100%",
         height: "100%",
         objectFit: "cover"
@@ -26,12 +26,12 @@ const SliderBar = () => {
       background: "#002e5b"
     },
     {
-      title: "Modern Development",
-      subtitle: "Building the future with cutting-edge technologies",
-      description: "Our team uses the latest technologies and frameworks to build robust, scalable, and high-performance applications.",
+      title: "Education Management System",
+      subtitle: "Complete platform for student registration, admissions, fees, vouchers, results, and academic records",
+      description: "Streamline your educational institution operations with a reliable, scalable platform designed for schools and colleges.",
       image: {
-        src: "/slider06.jpg",
-        alt: "Modern Development",
+        src: "/slidereduction.jpg",
+        alt: "Education Management System",
         width: "100%",
         height: "100%",
         objectFit: "cover"
@@ -39,12 +39,12 @@ const SliderBar = () => {
       background: "#002e5b"
     },
     {
-      title: "Innovation & Excellence",
-      subtitle: "Pushing boundaries and delivering exceptional results",
-      description: "We combine creativity with technical expertise to deliver innovative solutions that exceed client expectations.",
+      title: "AI-Powered Analytics Dashboard",
+      subtitle: "Real-time insights, predictive analytics, and intelligent data visualization for smart decision-making",
+      description: "Transform your data into actionable intelligence with enterprise-grade AI analytics that drive strategic business outcomes.",
       image: {
         src: "/slider02.jpg",
-        alt: "Innovation Excellence",
+        alt: "AI Analytics Dashboard",
         width: "100%",
         height: "100%",
         objectFit: "cover"
@@ -111,7 +111,7 @@ const SliderBar = () => {
                       fontWeight: 'bold', 
                       mb: 2,
                       textShadow: '0 4px 8px rgba(0,0,0,0.3)',
-                      fontSize: { xs: '2rem', md: '3rem' }
+                      fontSize: { xs: '1.5rem', md: '2.25rem' }
                     }}
                   >
                     {slide.title}
@@ -122,7 +122,7 @@ const SliderBar = () => {
                       mb: 2, 
                       opacity: 0.9,
                       textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-                      fontSize: { xs: '1.2rem', md: '1.5rem' }
+                      fontSize: { xs: '1rem', md: '1.25rem' }
                     }}
                   >
                     {slide.subtitle}
@@ -138,25 +138,6 @@ const SliderBar = () => {
                   >
                     {slide.description}
                   </Typography>
-                  <Button 
-                    variant="contained" 
-                    size="large"
-                    sx={{
-                      backgroundColor: 'white',
-                      color: '#002e5b',
-                      borderRadius: '24px',
-                      fontWeight: 'bold',
-                      px: 4,
-                      py: 1.5,
-                      '&:hover': {
-                        backgroundColor: 'rgba(255,255,255,0.9)',
-                        transform: 'translateY(-2px)',
-                        boxShadow: '0 8px 25px rgba(0,0,0,0.3)'
-                      }
-                    }}
-                  >
-                    Get Started
-                  </Button>
                 </Box>
               </Grid>
               

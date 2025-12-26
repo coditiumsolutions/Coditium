@@ -1,0 +1,11 @@
+# msghauri3 account 
+Host github-msghauri3 
+    HostName github.com 
+    User git 
+    IdentityFile "C:\Users\Shaid Ghauri\.ssh\id_ed25519_msghauri3" 
+ 
+# coditium account 
+Host github-coditium 
+    HostName github.com 
+    User git 
+    IdentityFile "C:\Users\Shaid Ghauri\.ssh\id_ed25519_coditium" 

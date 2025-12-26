@@ -17,14 +17,14 @@ const Footer = () => {
     <Box 
       component="footer" 
       sx={{ 
-        backgroundColor: '#002e5b', 
-        color: 'white',
-        py: 6,
+        backgroundColor: '#f5f5f5', 
+        color: '#333',
+        py: 3,
         mt: 8
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           {/* Contact Us Column */}
           <Grid item xs={12} md={6}>
             <Typography variant="h6" gutterBottom>
@@ -56,11 +56,12 @@ const Footer = () => {
                   variant="outlined"
                   size="small"
                   sx={{
-                    color: 'white',
-                    borderColor: 'white',
+                    color: '#333',
+                    borderColor: '#ccc',
                     '&:hover': {
-                      borderColor: 'white',
-                      backgroundColor: 'rgba(255,255,255,0.1)'
+                      borderColor: '#002e5b',
+                      backgroundColor: 'rgba(0, 46, 91, 0.05)',
+                      color: '#002e5b'
                     }
                   }}
                 >
@@ -72,7 +73,7 @@ const Footer = () => {
         </Grid>
 
         {/* Bottom Copyright */}
-        <Typography variant="body2" align="center" sx={{ mt: 4 }}>
+        <Typography variant="body2" align="center" sx={{ mt: 2 }}>
           © {new Date().getFullYear()} Coditium. All rights reserved.
         </Typography>
       </Container>

@@ -46,10 +46,10 @@ const ServicesPage = () => {
       {/* Page Header */}
       <Box sx={{ textAlign: 'center', mb: 8 }}>
         <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', mb: 2, color: '#002e5b' }}>
-          Our Services
+          Our Team
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto', lineHeight: 1.6 }}>
-          Comprehensive digital solutions tailored to your business needs.
+          Meet our talented team of professionals dedicated to delivering excellence.
         </Typography>
       </Box>
 

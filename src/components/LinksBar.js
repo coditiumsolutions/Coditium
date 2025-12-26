@@ -8,8 +8,8 @@ const LinksBar = () => {
   
   const tabs = [
     { id: 'home', label: 'Home', path: '/' },
-    { id: 'about', label: 'About', path: '/about' },
-    { id: 'services', label: 'Services', path: '/services' },
+    { id: 'about', label: 'AI', path: '/about' },
+    { id: 'services', label: 'Our Team', path: '/services' },
     { id: 'portfolio', label: 'Portfolio', path: '/portfolio' },
     { id: 'contact', label: 'Contact', path: '/contact' }
   ];
