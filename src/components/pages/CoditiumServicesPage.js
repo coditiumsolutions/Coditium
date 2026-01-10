@@ -102,7 +102,7 @@ const CoditiumServicesPage = () => {
     <Container maxWidth="xl" sx={{ py: 8, minHeight: '100vh' }}>
       {/* Header Section */}
       <Box sx={{ textAlign: 'center', mb: 8 }}>
-        <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', mb: 2, color: '#002e5b' }}>
+        <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', mb: 0.5, color: '#002e5b' }}>
           Coditium Portfolio
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto', lineHeight: 1.6 }}>

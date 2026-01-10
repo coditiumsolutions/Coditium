@@ -1,11 +1,101 @@
-import React from 'react';
-import { Container, Typography, Box, Paper, Button, Grid } from '@mui/material';
-import { ArrowForward } from '@mui/icons-material';
+import React, { useState } from 'react';
+import { 
+  Container, 
+  Typography, 
+  Box, 
+  Paper, 
+  Button, 
+  Grid, 
+  Card, 
+  CardContent, 
+  CardMedia, 
+  Chip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  IconButton,
+  useTheme,
+  useMediaQuery
+} from '@mui/material';
+import { ArrowForward, Close, Launch, Code } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import SliderBar from '../SliderBar';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const projects = [
+    {
+      id: 1,
+      title: "Data Scraping & Web Automation",
+      description: "Professional web development services offering custom solutions, responsive designs, and modern user experiences for businesses of all sizes.",
+      image: "/portfolio/card01.png",
+      category: "Web Development",
+      technologies: ["React", "Node.js", "MongoDB", "Responsive Design"],
+      features: ["Custom Solutions", "Responsive Design", "Modern UX", "SEO Optimized"],
+      liveUrl: "#",
+      githubUrl: "#"
+    },
+    {
+      id: 2,
+      title: "Voice Assistant Development",
+      description: "A comprehensive salon management system featuring online booking, service management, and customer reviews. Perfect for modern salons and beauty centers looking to digitize their operations.",
+      image: "/portfolio/card02.png",
+      category: "Management System",
+      technologies: ["React", "Express.js", "MySQL", "Stripe API"],
+      features: ["Online Booking", "Service Management", "Customer Reviews", "Payment Integration"],
+      liveUrl: "#",
+      githubUrl: "#"
+    },
+    {
+      id: 3,
+      title: "Voice Chatbot",
+      description: "A dynamic restaurant menu and review platform that helps restaurants showcase their offerings and collect customer feedback. Features digital menus, ratings, and customer engagement tools.",
+      image: "/portfolio/card03.png",
+      category: "Restaurant Platform",
+      technologies: ["Vue.js", "Firebase", "Google Maps API", "Real-time Updates"],
+      features: ["Digital Menus", "Rating System", "Customer Feedback", "Analytics"],
+      liveUrl: "#",
+      githubUrl: "#"
+    },
+    {
+      id: 4,
+      title: "AI Powered Analytics Dashboard",
+      description: "A powerful Point of Sale system with inventory management, sales tracking, and detailed reporting. Perfect for retail stores, restaurants, and small businesses.",
+      image: "/portfolio/card04.png",
+      category: "POS System",
+      technologies: ["Java", "Spring Boot", "PostgreSQL", "WebSocket"],
+      features: ["Inventory Management", "Sales Tracking", "Reporting", "Multi-store Support"],
+      liveUrl: "#",
+      githubUrl: "#"
+    },
+    {
+      id: 6,
+      title: "Data Analytics & Dashboards",
+      description: "An intelligent analytics dashboard powered by AI, providing real-time insights, predictive analytics, and data visualization for informed decision-making.",
+      image: "/portfolio/card06.png",
+      category: "Analytics Platform",
+      technologies: ["React", "Python", "TensorFlow", "D3.js"],
+      features: ["Real-time Insights", "Predictive Analytics", "Data Visualization", "AI-powered"],
+      liveUrl: "#",
+      githubUrl: "#"
+    }
+  ];
+
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    setSelectedProject(null);
+  };
 
   // Auto-assign images based on service ID
   const getServiceImage = (serviceId) => {
@@ -72,351 +162,238 @@ const HomePage = () => {
     image: getServiceImage(service.id)
   }));
 
-  // AI Offerings from About page
-  const aiOfferings = [
-    {
-      title: "AI Assistant",
-      description: "Task automation and intelligent decision support to streamline business operations and enhance productivity.",
-      image: "/AI/card01.png"
-    },
-    {
-      title: "Chatbot Development",
-      description: "Custom AI chatbots for customer engagement, instant support, and automated user interactions across platforms.",
-      image: "/AI/card02.png"
-    },
-    {
-      title: "Voice Chatbot",
-      description: "Voice-enabled AI assistants with speech recognition and synthesis for natural, hands-free interactions.",
-      image: "/AI/card03.png"
-    },
-    {
-      title: "AI Automation",
-      description: "Intelligent workflow automation solutions that optimize processes and reduce manual effort for enterprise efficiency.",
-      image: "/AI/card04.png"
-    },
-    {
-      title: "DocuSource",
-      description: "AI-powered content generation and writing assistance tools designed for authors and content creators. Intelligent document processing, summarization, and research assistance for professionals and researchers.",
-      image: "/AI/card05.png"
-    }
-  ];
-
   return (
     <>
       <SliderBar />
       
-      {/* AI Section */}
-      <Box sx={{ py: 8, backgroundColor: '#f0f7ff' }}>
-        <Container maxWidth="xl">
-          {/* Section Header */}
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <Typography 
-              variant="h3" 
-              component="h2" 
+      {/* Portfolio Section */}
+      <Container maxWidth="xl" sx={{ py: 8 }}>
+        {/* PROPER GRID LAYOUT - 3 columns */}
+        <Grid 
+          container 
+          spacing={4} 
+          sx={{ 
+            display: 'grid',
+            gridTemplateColumns: { 
+              xs: '1fr', 
+              sm: 'repeat(2, 1fr)', 
+              md: 'repeat(3, 1fr)' 
+            },
+            gap: 4,
+            width: '100%',
+            margin: 0
+          }}
+        >
+          {projects.map((project) => (
+            <Box 
+              key={project.id}
               sx={{ 
-                fontWeight: 'bold', 
-                mb: 2, 
-                color: '#002e5b',
-                fontSize: { xs: '2rem', md: '2.5rem' }
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column'
               }}
             >
-              AI Solutions
-            </Typography>
-            <Typography 
-              variant="h6" 
-              color="text.secondary" 
-              sx={{ 
-                maxWidth: 800, 
-                mx: 'auto', 
-                lineHeight: 1.6,
-                fontSize: { xs: '1rem', md: '1.25rem' }
-              }}
-            >
-              Harnessing the power of artificial intelligence to deliver innovative, enterprise-ready solutions that transform how businesses operate and interact with their customers.
-            </Typography>
-          </Box>
-
-          {/* AI Offerings Grid */}
-          <Box
-            sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              alignItems: 'stretch',
-              gap: 4,
-              width: '100%'
-            }}
-          >
-            {aiOfferings.map((item, index) => (
-              <Paper
-                key={index}
-                elevation={3}
-                sx={{
-                  p: 4,
+              <Card 
+                sx={{ 
+                  height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  height: '100%',
-                  minHeight: { xs: 'auto', sm: '450px', md: '450px' },
                   transition: 'all 0.3s ease-in-out',
-                  backgroundColor: 'white',
-                  borderRadius: '12px',
-                  border: '1px solid #e0e0e0',
-                  width: { 
-                    xs: '100%', 
-                    sm: 'calc(50% - 16px)', 
-                    md: 'calc(33.333% - 22px)' 
-                  },
-                  minWidth: { xs: '100%', sm: '280px', md: '300px' },
-                  maxWidth: { xs: '100%', sm: '400px', md: '400px' },
-                  '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: 6,
-                    borderColor: '#002e5b'
-                  }
-                }}
-              >
-                {/* AI Image */}
-                <Box
-                  component="img"
-                  src={item.image}
-                  alt={item.title}
-                  sx={{
-                    width: '100%',
-                    height: 150,
-                    objectFit: 'cover',
-                    borderRadius: 1,
-                    mb: 3
-                  }}
-                  onError={(e) => {
-                    e.target.src = '/AI/ai.png';
-                  }}
-                />
-                
-                {/* AI Title */}
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    fontWeight: 'bold', 
-                    mb: 2, 
-                    color: '#002e5b',
-                    fontSize: { xs: '1.25rem', md: '1.5rem' }
-                  }}
-                >
-                  {item.title}
-                </Typography>
-                
-                {/* AI Description */}
-                <Typography 
-                  variant="body1" 
-                  color="text.secondary" 
-                  sx={{ 
-                    lineHeight: 1.6, 
-                    flexGrow: 1,
-                    fontSize: { xs: '0.9rem', md: '1rem' }
-                  }}
-                >
-                  {item.description}
-                </Typography>
-              </Paper>
-            ))}
-          </Box>
-
-          {/* View All AI Button */}
-          <Box sx={{ textAlign: 'center', mt: 6 }}>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => {
-                navigate('/about');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              endIcon={<ArrowForward />}
-              sx={{
-                backgroundColor: '#002e5b',
-                color: 'white',
-                fontWeight: 'bold',
-                px: 5,
-                py: 1.5,
-                borderRadius: '8px',
-                textTransform: 'none',
-                fontSize: '1.1rem',
-                '&:hover': {
-                  backgroundColor: '#00498a',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 8px 20px rgba(0, 46, 91, 0.3)'
-                },
-                transition: 'all 0.3s ease'
-              }}
-            >
-              View All AI Solutions
-            </Button>
-          </Box>
-        </Container>
-      </Box>
-      
-      {/* Services Section */}
-      <Box sx={{ py: 8, backgroundColor: '#f8fafc' }}>
-        <Container maxWidth="xl">
-          {/* Section Header */}
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <Typography 
-              variant="h3" 
-              component="h2" 
-              sx={{ 
-                fontWeight: 'bold', 
-                mb: 2, 
-                color: '#002e5b',
-                fontSize: { xs: '2rem', md: '2.5rem' }
-              }}
-            >
-              Our Services
-            </Typography>
-            <Typography 
-              variant="h6" 
-              color="text.secondary" 
-              sx={{ 
-                maxWidth: 800, 
-                mx: 'auto', 
-                lineHeight: 1.6,
-                fontSize: { xs: '1rem', md: '1.25rem' }
-              }}
-            >
-              Comprehensive technology solutions tailored to your business needs. 
-              From AI-powered applications to custom web development, we deliver excellence.
-            </Typography>
-          </Box>
-
-          {/* Services Grid - Show only first 3 services */}
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: { 
-                xs: '1fr', 
-                sm: 'repeat(2, 1fr)', 
-                md: 'repeat(3, 1fr)' 
-              },
-              gap: 4,
-              width: '100%'
-            }}
-          >
-            {services.slice(0, 3).map((service) => (
-              <Paper
-                key={service.id}
-                elevation={3}
-                sx={{
-                  p: 4,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: '100%',
-                  transition: 'all 0.3s ease-in-out',
-                  backgroundColor: 'white',
-                  borderRadius: '12px',
+                  cursor: 'pointer',
                   '&:hover': {
                     transform: 'translateY(-8px)',
                     boxShadow: 6
                   }
                 }}
+                onClick={() => handleProjectClick(project)}
               >
-                {/* Service Image */}
-                <Box
+                {/* Project Image */}
+                <CardMedia
                   component="img"
-                  src={service.image}
-                  alt={service.title}
-                  sx={{
-                    width: '100%',
-                    height: 150,
+                  height="200"
+                  image={project.image}
+                  alt={project.title}
+                  sx={{ 
+                    objectFit: 'cover',
+                    borderBottom: '2px solid',
+                    borderColor: 'divider'
+                  }}
+                  onError={(e) => {
+                    e.target.src = '/portfolio/card01.png';
+                  }}
+                />
+                
+                {/* Project Content */}
+                <CardContent sx={{ flexGrow: 1, p: 3 }}>
+                  <Chip 
+                    label={project.category} 
+                    size="small" 
+                    sx={{ 
+                      mb: 2, 
+                      backgroundColor: '#002e5b', 
+                      color: 'white',
+                      fontSize: '0.75rem'
+                    }} 
+                  />
+                  
+                  <Typography 
+                    variant="h5" 
+                    component="h3" 
+                    sx={{ 
+                      fontWeight: 'bold',
+                      mb: 2,
+                      color: '#002e5b',
+                      minHeight: '64px'
+                    }}
+                  >
+                    {project.title}
+                  </Typography>
+                  
+                  <Typography 
+                    variant="body2" 
+                    color="text.secondary"
+                    sx={{ 
+                      lineHeight: 1.6,
+                      mb: 2,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden'
+                    }}
+                  >
+                    {project.description}
+                  </Typography>
+                  
+                  <Button 
+                    variant="outlined" 
+                    fullWidth
+                    sx={{ 
+                      mt: 'auto',
+                      borderColor: '#002e5b',
+                      color: '#002e5b',
+                      '&:hover': {
+                        backgroundColor: '#002e5b',
+                        color: 'white'
+                      }
+                    }}
+                  >
+                    View Details
+                  </Button>
+                </CardContent>
+              </Card>
+            </Box>
+          ))}
+        </Grid>
+
+        {/* Project Details Dialog */}
+        <Dialog 
+          open={openDialog} 
+          onClose={handleCloseDialog} 
+          maxWidth="md" 
+          fullWidth
+          fullScreen={isMobile}
+        >
+          {selectedProject && (
+            <>
+              <DialogTitle sx={{ m: 0, p: 3, pb: 1 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#002e5b' }}>
+                    {selectedProject.title}
+                  </Typography>
+                  <IconButton onClick={handleCloseDialog}>
+                    <Close />
+                  </IconButton>
+                </Box>
+                <Chip 
+                  label={selectedProject.category} 
+                  sx={{ 
+                    mt: 1,
+                    backgroundColor: '#002e5b', 
+                    color: 'white' 
+                  }} 
+                />
+              </DialogTitle>
+              
+              <DialogContent sx={{ p: 3 }}>
+                <CardMedia
+                  component="img"
+                  height="250"
+                  image={selectedProject.image}
+                  alt={selectedProject.title}
+                  sx={{ 
                     objectFit: 'cover',
                     borderRadius: 1,
                     mb: 3
                   }}
-                  onError={(e) => {
-                    e.target.src = '/services/thumbnail.jpg';
-                  }}
                 />
                 
-                {/* Service Title */}
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    fontWeight: 'bold', 
-                    mb: 2, 
-                    color: '#002e5b',
-                    fontSize: { xs: '1.25rem', md: '1.5rem' }
-                  }}
-                >
-                  {service.title}
+                <Typography variant="body1" sx={{ lineHeight: 1.8, mb: 3 }}>
+                  {selectedProject.description}
                 </Typography>
                 
-                {/* Service Description */}
-                <Typography 
-                  variant="body1" 
-                  color="text.secondary" 
+                <Grid container spacing={3}>
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="h6" sx={{ mb: 2, color: '#002e5b' }}>
+                      Key Features
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {selectedProject.features.map((feature, index) => (
+                        <Chip 
+                          key={index}
+                          label={feature} 
+                          sx={{ 
+                            backgroundColor: '#f0f7ff',
+                            color: '#002e5b'
+                          }} 
+                        />
+                      ))}
+                    </Box>
+                  </Grid>
+                  
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="h6" sx={{ mb: 2, color: '#002e5b' }}>
+                      Technologies Used
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {selectedProject.technologies.map((tech, index) => (
+                        <Chip 
+                          key={index}
+                          label={tech} 
+                          variant="outlined"
+                          sx={{ borderColor: '#002e5b', color: '#002e5b' }}
+                        />
+                      ))}
+                    </Box>
+                  </Grid>
+                </Grid>
+              </DialogContent>
+              
+              <DialogActions sx={{ p: 3, pt: 1 }}>
+                <Button 
+                  startIcon={<Launch />}
+                  variant="contained"
                   sx={{ 
-                    lineHeight: 1.6, 
-                    mb: 3, 
-                    flexGrow: 1,
-                    fontSize: { xs: '0.9rem', md: '1rem' }
+                    backgroundColor: '#002e5b',
+                    '&:hover': { backgroundColor: '#00498a' }
                   }}
                 >
-                  {service.description}
-                </Typography>
-                
-                {/* Call to Action Button */}
-                <Button
-                  variant="outlined"
-                  endIcon={<ArrowForward />}
-                  fullWidth
-                  onClick={() => {
-                    navigate('/coditium-services');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  sx={{
-                    borderColor: '#002e5b',
-                    color: '#002e5b',
-                    '&:hover': {
-                      backgroundColor: '#002e5b',
-                      color: 'white'
-                    }
-                  }}
-                >
-                  {service.buttonText}
+                  Live Demo
                 </Button>
-              </Paper>
-            ))}
-          </Box>
-
-          {/* View All Services Button */}
-          <Box sx={{ textAlign: 'center', mt: 6 }}>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => {
-                navigate('/coditium-services');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              endIcon={<ArrowForward />}
-              sx={{
-                backgroundColor: '#002e5b',
-                color: 'white',
-                fontWeight: 'bold',
-                px: 5,
-                py: 1.5,
-                borderRadius: '8px',
-                textTransform: 'none',
-                fontSize: '1.1rem',
-                '&:hover': {
-                  backgroundColor: '#00498a',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 8px 20px rgba(0, 46, 91, 0.3)'
-                },
-                transition: 'all 0.3s ease'
-              }}
-            >
-              View All Services
-            </Button>
-          </Box>
-        </Container>
-      </Box>
+                <Button 
+                  startIcon={<Code />}
+                  variant="outlined"
+                  sx={{ 
+                    borderColor: '#002e5b',
+                    color: '#002e5b'
+                  }}
+                >
+                  Source Code
+                </Button>
+              </DialogActions>
+            </>
+          )}
+        </Dialog>
+      </Container>
     </>
   );
 };
