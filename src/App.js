@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Box, Fab } from '@mui/material';
 import { KeyboardArrowUp } from '@mui/icons-material';
 import TopBar from './components/TopBar';
@@ -8,51 +8,71 @@ import Footer from './components/Footer';
 import ScrollTop from './components/ScrollTop';
 import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 import Chatbot from './components/Chatbot';
-import HomePage from './components/pages/HomePage';
-import AboutPage from './components/pages/AboutPage';
-import ServicesPage from './components/pages/ServicesPage';
-import CoditiumServicesPage from './components/pages/CoditiumServicesPage';
-import PortfolioPage from './components/pages/PortfolioPage';
-import ContactPage from './components/pages/ContactPage';
-import PropertyManagementDetails from './components/ProjectDetails/PropertyManagementDetails';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import CoditiumServicesPage from './pages/CoditiumServicesPage';
+import PortfolioPage from './pages/PortfolioPage';
+import ContactPage from './pages/ContactPage';
+import PropertyManagementDetails from './ProjectDetails/PropertyManagementDetails';
+import LoginPage from './pages/LoginPage';
+import AdminDashboard from './pages/AdminDashboard';
 
-const App = () => {
+const AppContent = () => {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/admin/login';
+  const isAdminDashboard = location.pathname === '/admin/dashboard';
+
   return (
-    <Router>
-      <ScrollToTopOnRouteChange />
-      <Box sx={{ flexGrow: 1, backgroundColor: 'white' }}>
-        <style>
-          {`@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }`}
-        </style>
-        
-        <div id="back-to-top-anchor" />
-        
-        <TopBar />
-        <LinksBar />
-        
-        <Box sx={{ backgroundColor: 'white', minHeight: '100vh' }}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/property-management-details" element={<PropertyManagementDetails />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/coditium-services" element={<CoditiumServicesPage />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </Box>
+    <Box sx={{ flexGrow: 1, backgroundColor: 'white' }}>
+      <style>
+        {`@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }`}
+      </style>
+      
+      <div id="back-to-top-anchor" />
+      
+      {!isLoginPage && !isAdminDashboard && (
+        <>
+          <TopBar />
+          <LinksBar />
+        </>
+      )}
+      
+      <Box sx={{ backgroundColor: 'white', minHeight: '100vh' }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/property-management-details" element={<PropertyManagementDetails />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/coditium-services" element={<CoditiumServicesPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/admin/login" element={<LoginPage />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        </Routes>
+      </Box>
 
-        <Footer />
-        
-        <Chatbot />
-        
+      {!isLoginPage && !isAdminDashboard && <Footer />}
+      
+      {!isLoginPage && <Chatbot />}
+      
+      {!isLoginPage && (
         <ScrollTop>
           <Fab color="primary" size="medium" aria-label="scroll back to top"
             sx={{ backgroundColor: '#002e5b', '&:hover': { backgroundColor: '#00498a' } }}>
             <KeyboardArrowUp />
           </Fab>
         </ScrollTop>
-      </Box>
+      )}
+    </Box>
+  );
+};
+
+const App = () => {
+  return (
+    <Router>
+      <ScrollToTopOnRouteChange />
+      <AppContent />
     </Router>
   );
 };

@@ -20,7 +20,8 @@ import {
 } from '@mui/material';
 import { ArrowForward, Close, Launch, Code } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import SliderBar from '../SliderBar';
+import SliderBar from '../components/SliderBar';
+import LogoMarquee from '../components/LogoMarquee';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -393,6 +394,9 @@ const HomePage = () => {
             </>
           )}
         </Dialog>
+
+        {/* Logo Marquee Section */}
+        <LogoMarquee />
       </Container>
     </>
   );

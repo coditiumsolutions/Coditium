@@ -13,8 +13,9 @@ import {
   Chip,
   TextField,
   Avatar,
-  useMediaQuery,  // Add this
-  useTheme        // Add this
+  useMediaQuery,
+  useTheme,
+  CircularProgress
 } from '@mui/material';
 import {
   KeyboardArrowLeft,
@@ -41,6 +42,7 @@ const SliderBar = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [openDemoDialog, setOpenDemoDialog] = useState(false);
+  const [demoSubmitting, setDemoSubmitting] = useState(false);
   const [demoForm, setDemoForm] = useState({
     name: '',
     email: '',
@@ -364,12 +366,34 @@ Our online property management system is built to reduce manual work, improve or
     });
   };
 
-  const handleSubmitDemo = (e) => {
+  const handleSubmitDemo = async (e) => {
     e.preventDefault();
-    console.log('Demo Request Submitted:', demoForm);
-    // Add your API call here
-    handleCloseDemoDialog();
-    alert('Demo request submitted successfully! We will contact you soon.');
+    setDemoSubmitting(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/demo-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(demoForm),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        handleCloseDemoDialog();
+        setDemoForm({ name: '', email: '', phone: '', company: '', requirements: '' });
+        alert('Demo request submitted successfully! We will contact you soon. Check your email for confirmation.');
+      } else {
+        alert('Failed to submit demo request. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting demo request:', error);
+      alert('Connection error. Please check if server is running.');
+    } finally {
+      setDemoSubmitting(false);
+    }
   };
 
   const handleOpenDetailsPage = () => {
@@ -405,14 +429,14 @@ Our online property management system is built to reduce manual work, improve or
       <>
         <DialogTitle sx={{ m: 0, p: 3, pb: 2 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#002e5b' }}>
+            <Typography variant="h4" component="div" sx={{ fontWeight: 'bold', color: '#002e5b' }}>
               {selectedProject.title}
             </Typography>
             <IconButton onClick={handleCloseDialog}>
               <Close />
             </IconButton>
           </Box>
-          <Typography variant="h6" sx={{ color: '#002e5b', mt: 1, fontWeight: 500 }}>
+          <Typography variant="body1" component="div" sx={{ color: '#002e5b', mt: 1, fontWeight: 500, fontSize: '1.1rem' }}>
             {selectedProject.subtitle}
           </Typography>
           <Chip
@@ -565,20 +589,35 @@ const renderDemoDialog = () => (
     onClose={handleCloseDemoDialog}
     maxWidth="sm"
     fullWidth
+    fullScreen={isMobile} // Mobile par full screen
+    sx={{
+      '& .MuiDialog-container': {
+        alignItems: { xs: 'flex-end', sm: 'center' }, // Mobile par bottom align
+        justifyContent: { xs: 'flex-end', sm: 'center' }
+      }
+    }}
     PaperProps={{
       sx: {
-        maxWidth: { xs: '95%', sm: '600px' },
-        width: { xs: '95%', sm: '600px' },
-        borderRadius: '12px',
-        overflow: 'hidden'
+        maxWidth: { xs: '100%', sm: '600px' },
+        width: { xs: '100%', sm: '600px' },
+        maxHeight: { xs: '100vh', sm: '90vh', md: '85vh' }, // Viewport height
+        height: { xs: '100vh', sm: 'fit-content', md: 'fit-content' }, // Fit content for desktop
+        borderRadius: { xs: '12px 12px 0 0', sm: '12px' }, // Mobile par top rounded
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        margin: { xs: 0, sm: 'auto' }, // Mobile par no margin
+        position: { xs: 'fixed', sm: 'relative' } // Mobile par fixed
       }
     }}
   >
     <DialogTitle sx={{ 
       m: 0, 
-      p: { xs: 2, sm: 3 }, 
+      p: { xs: 1.5, sm: 2, md: 3 }, // Reduced padding for smaller screens
       backgroundColor: '#002e5b', 
-      color: 'white' 
+      color: 'white',
+      flexShrink: 0, // Always visible, don't shrink
+      pb: { xs: 1, sm: 1.5 } // Reduced bottom padding
     }}>
       <Box sx={{ 
         display: 'flex', 
@@ -609,9 +648,9 @@ const renderDemoDialog = () => (
         </IconButton>
       </Box>
       <Typography variant="body2" sx={{ 
-        mt: 1, 
+        mt: { xs: 0.5, sm: 1 }, // Reduced top margin
         opacity: 0.9,
-        fontSize: { xs: '0.875rem', sm: '0.9rem' }
+        fontSize: { xs: '0.8rem', sm: '0.875rem', md: '0.9rem' } // Smaller font on small screens
       }}>
         Fill the form below and we'll schedule a personalized demo
       </Typography>
@@ -619,9 +658,19 @@ const renderDemoDialog = () => (
 
     <form onSubmit={handleSubmitDemo}>
       <DialogContent sx={{ 
-        p: { xs: 2, sm: 3, md: 4 },
+        p: { xs: 1.5, sm: 2, md: 3 }, // Reduced padding for smaller screens
+        overflowY: 'auto', // Scrollable content
+        overflowX: 'hidden',
+        flex: '1 1 auto', // Take available space
+        minHeight: 0, // Important for flex scrolling
+        maxHeight: { 
+          xs: 'calc(100vh - 200px)', // Mobile: viewport minus header/footer
+          sm: 'calc(90vh - 180px)', // Tablet: viewport minus header/footer
+          md: 'calc(85vh - 200px)' // Desktop: viewport minus header/footer
+        },
         '& .MuiTextField-root': {
-          width: '100%'
+          width: '100%',
+          mb: { xs: 1.5, sm: 2 } // Reduced margin for smaller screens
         }
       }}>
         
@@ -630,13 +679,13 @@ const renderDemoDialog = () => (
           sx={{
             width: '100%',
             maxWidth: '100%',
-            p: 1
+            p: { xs: 0.5, sm: 1 } // Reduced padding for smaller screens
           }}
         >
 
           {/* FULL NAME */}
-          <Grid item xs={12}>
-            <Box sx={{ mb: 2.5 }}>
+          <Grid size={{ xs: 12 }}>
+            <Box sx={{ mb: { xs: 1.5, sm: 2, md: 2.5 } }}>
               <TextField
                 fullWidth
                 required
@@ -655,8 +704,8 @@ const renderDemoDialog = () => (
           </Grid>
 
           {/* EMAIL */}
-          <Grid item xs={12}>
-            <Box sx={{ mb: 2.5 }}>
+          <Grid size={{ xs: 12 }}>
+            <Box sx={{ mb: { xs: 1.5, sm: 2, md: 2.5 } }}>
               <TextField
                 fullWidth
                 required
@@ -676,8 +725,8 @@ const renderDemoDialog = () => (
           </Grid>
 
           {/* PHONE */}
-          <Grid item xs={12}>
-            <Box sx={{ mb: 2.5 }}>
+          <Grid size={{ xs: 12 }}>
+            <Box sx={{ mb: { xs: 1.5, sm: 2, md: 2.5 } }}>
               <TextField
                 fullWidth
                 required
@@ -696,8 +745,8 @@ const renderDemoDialog = () => (
           </Grid>
 
           {/* COMPANY — 🔥 NOW FULL WIDTH */}
-          <Grid item xs={12}>
-            <Box sx={{ mb: 2.5 }}>
+          <Grid size={{ xs: 12 }}>
+            <Box sx={{ mb: { xs: 1.5, sm: 2, md: 2.5 } }}>
               <TextField
                 fullWidth
                 name="company"
@@ -715,7 +764,7 @@ const renderDemoDialog = () => (
           </Grid>
 
           {/* REQUIREMENTS — 🔥 NOW TRUE FULL WIDTH */}
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }}>
             <TextField
               fullWidth
               multiline
@@ -751,10 +800,13 @@ const renderDemoDialog = () => (
       </DialogContent>
 
       <DialogActions sx={{ 
-        p: { xs: 2, sm: 3 }, 
-        pt: { xs: 1, sm: 2 },
+        p: { xs: 1.5, sm: 2, md: 3 }, // Reduced padding for smaller screens
+        pt: { xs: 1, sm: 1.5, md: 2 },
+        pb: { xs: 1.5, sm: 2 }, // Bottom padding
         flexDirection: { xs: 'column', sm: 'row' },
-        gap: { xs: 1, sm: 2 }
+        gap: { xs: 1, sm: 2 },
+        flexShrink: 0, // Always visible, don't shrink
+        borderTop: { xs: '1px solid rgba(0, 0, 0, 0.1)', sm: 'none' } // Visual separator on small screens
       }}>
         <Button
           onClick={handleCloseDemoDialog}
@@ -777,6 +829,7 @@ const renderDemoDialog = () => (
         <Button
           type="submit"
           variant="contained"
+          disabled={demoSubmitting}
           sx={{
             backgroundColor: '#002e5b',
             color: 'white',
@@ -785,15 +838,30 @@ const renderDemoDialog = () => (
             py: { xs: 0.75, sm: 0.875 },
             px: { xs: 3, sm: 4 },
             borderRadius: '6px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 1,
             '&:hover': {
               backgroundColor: '#00498a',
               transform: 'translateY(-1px)',
               boxShadow: '0 4px 12px rgba(0, 46, 91, 0.3)'
-            }
+            },
+            opacity: demoSubmitting ? 0.85 : 1
           }}
           size={isSmallScreen ? "medium" : "medium"}
         >
-          Submit Request
+          {demoSubmitting ? (
+            <>
+              <CircularProgress 
+                size={20} 
+                sx={{ color: 'white' }} 
+              />
+              Processing...
+            </>
+          ) : (
+            'Submit Request'
+          )}
         </Button>
       </DialogActions>
     </form>
@@ -826,7 +894,7 @@ const renderDemoDialog = () => (
               <Grid container sx={{ height: '100%', alignItems: 'center', width: '100%' }}>
                 {/* Left Side - First Item */}
                 {leftSlide && (
-                  <Grid item xs={12} md={6} sx={{ width: '50%', height: '100%' }}>
+                  <Grid size={{ xs: 12, md: 6 }} sx={{ width: '50%', height: '100%' }}>
                     <Box sx={{ 
                       padding: { xs: 4, md: 8 },
                       textAlign: { xs: 'center', md: 'left' },
@@ -920,7 +988,7 @@ const renderDemoDialog = () => (
                 
                 {/* Right Side - Second Item */}
                 {rightSlide && (
-                  <Grid item xs={12} md={6} sx={{ width: '50%', height: '100%' }}>
+                  <Grid size={{ xs: 12, md: 6 }} sx={{ width: '50%', height: '100%' }}>
                     <Box sx={{ 
                       padding: { xs: 4, md: 8 },
                       textAlign: { xs: 'center', md: 'left' },
