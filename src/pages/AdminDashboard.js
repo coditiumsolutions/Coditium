@@ -81,7 +81,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const adminUser = localStorage.getItem('adminUser');
     if (!adminUser) {
-      navigate('/admin/login');
+      navigate('/login');
       return;
     }
     fetchData();

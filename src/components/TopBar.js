@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Box, Typography, Button, IconButton, Menu, MenuItem, Avatar } from '@mui/material';
-import { Login, Logout, AccountCircle } from '@mui/icons-material';
+import { Logout, AccountCircle } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 const TopBar = () => {
@@ -14,10 +14,6 @@ const TopBar = () => {
       setAdminUser(JSON.parse(user));
     }
   }, []);
-
-  const handleLoginClick = () => {
-    navigate('/admin/login');
-  };
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -126,9 +122,9 @@ const TopBar = () => {
           </Box>
         </Box>
 
-        {/* Login Button / Admin Menu */}
+        {/* Admin Menu - only when logged in (no Login button; use /login in browser to open login) */}
         <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-          {adminUser ? (
+          {adminUser && (
             <>
               <IconButton
                 onClick={handleMenuClick}
@@ -164,26 +160,6 @@ const TopBar = () => {
                 </MenuItem>
               </Menu>
             </>
-          ) : (
-            <Button
-              variant="outlined"
-              startIcon={<Login />}
-              onClick={handleLoginClick}
-              sx={{
-                borderColor: '#002e5b',
-                color: '#002e5b',
-                textTransform: 'none',
-                fontSize: { xs: '0.75rem', sm: '0.875rem' },
-                px: { xs: 1.5, sm: 2 },
-                py: { xs: 0.5, sm: 0.75 },
-                '&:hover': {
-                  borderColor: '#0170b9',
-                  backgroundColor: 'rgba(0, 46, 91, 0.05)'
-                }
-              }}
-            >
-              Login
-            </Button>
           )}
         </Box>
       </Toolbar>

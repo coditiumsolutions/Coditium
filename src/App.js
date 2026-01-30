@@ -11,6 +11,10 @@ import Chatbot from './components/Chatbot';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
+import ServicesMainPage from './pages/ServicesMainPage';
+import ServiceSubPage from './pages/ServiceSubPage';
+import ProductsMainPage from './pages/ProductsMainPage';
+import ProductSubPage from './pages/ProductSubPage';
 import CoditiumServicesPage from './pages/CoditiumServicesPage';
 import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
@@ -20,7 +24,7 @@ import AdminDashboard from './pages/AdminDashboard';
 
 const AppContent = () => {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/admin/login';
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/login/';
   const isAdminDashboard = location.pathname === '/admin/dashboard';
 
   return (
@@ -43,11 +47,16 @@ const AppContent = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/property-management-details" element={<PropertyManagementDetails />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/our-team" element={<ServicesPage />} />
+          <Route path="/services" element={<ServicesMainPage />} />
+          <Route path="/services/:serviceSlug" element={<ServiceSubPage />} />
+          <Route path="/products" element={<ProductsMainPage />} />
+          <Route path="/products/:productSlug" element={<ProductSubPage />} />
           <Route path="/coditium-services" element={<CoditiumServicesPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/admin/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login/" element={<LoginPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </Box>
