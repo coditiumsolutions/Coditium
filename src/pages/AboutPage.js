@@ -1,331 +1,327 @@
-import React, { useEffect, useState } from 'react';
-import { 
-  Container, 
-  Typography, 
-  Box, 
-  Grid, 
-  Card, 
-  CardContent, 
-  CardMedia, 
-  Chip,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  IconButton,
-  useTheme,
-  useMediaQuery
-} from '@mui/material';
-import { Close, Launch, Code } from '@mui/icons-material';
+import React, { useEffect } from 'react';
+import { Container, Typography, Box, Grid, LinearProgress } from '@mui/material';
+import {
+  History,
+  Groups,
+  Psychology,
+  AutoAwesome,
+  Verified,
+  Handshake,
+} from '@mui/icons-material';
+import { colors, gradients, radius, shadows } from '../theme/designTokens';
+
+const experienceStats = [
+  {
+    icon: History,
+    title: '20 Years and Beyond',
+    description: 'Our consistent innovation has positioned us on the forefront.',
+  },
+  {
+    icon: Groups,
+    title: '10+ Team Members',
+    description: 'Our diverse team provides a wide range of capabilities.',
+  },
+  {
+    icon: Verified,
+    title: 'Trusted in Pakistan',
+    description:
+      'Delivering property management, school management, and enterprise software across the region.',
+  },
+];
+
+const skillMetrics = [
+  { label: 'Innovation', value: 92 },
+  { label: 'Extensive Experience', value: 96 },
+  { label: 'Commitment', value: 98 },
+];
 
 const AboutPage = () => {
-  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [openDialog, setOpenDialog] = useState(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const aiOfferings = [
-    {
-      id: 1,
-      title: "AI Assistant",
-      description: "Task automation and intelligent decision support to streamline business operations and enhance productivity.",
-      image: "/AI/card01.png",
-      category: "AI Solutions",
-      technologies: ["Machine Learning", "Natural Language Processing", "Automation", "Decision Support"],
-      features: ["Task Automation", "Intelligent Support", "Business Operations", "Productivity Enhancement"]
-    },
-    {
-      id: 2,
-      title: "Chatbot Development",
-      description: "Custom AI chatbots for customer engagement, instant support, and automated user interactions across platforms.",
-      image: "/AI/card02.png",
-      category: "AI Solutions",
-      technologies: ["NLP", "GPT Technology", "Multi-platform", "Real-time Processing"],
-      features: ["Customer Engagement", "Instant Support", "Automated Interactions", "Multi-platform"]
-    },
-    {
-      id: 3,
-      title: "Voice Chatbot",
-      description: "Voice-enabled AI assistants with speech recognition and synthesis for natural, hands-free interactions.",
-      image: "/AI/card03.png",
-      category: "AI Solutions",
-      technologies: ["Speech Recognition", "Text-to-Speech", "Voice Processing", "Natural Interactions"],
-      features: ["Voice Recognition", "Speech Synthesis", "Hands-free", "Natural Interactions"]
-    },
-    {
-      id: 4,
-      title: "AI Automation",
-      description: "Intelligent workflow automation solutions that optimize processes and reduce manual effort for enterprise efficiency.",
-      image: "/AI/card04.png",
-      category: "AI Solutions",
-      technologies: ["Workflow Automation", "Process Optimization", "Enterprise AI", "Efficiency Tools"],
-      features: ["Workflow Automation", "Process Optimization", "Manual Effort Reduction", "Enterprise Efficiency"]
-    },
-    {
-      id: 5,
-      title: "DocuSource",
-      description: "AI-powered content generation and writing assistance tools designed for authors and content creators. Intelligent document processing, summarization, and research assistance for professionals and researchers.",
-      image: "/AI/card05.png",
-      category: "AI Solutions",
-      technologies: ["Content Generation", "Document Processing", "Summarization", "Research Tools"],
-      features: ["Content Generation", "Document Processing", "Summarization", "Research Assistance"]
-    }
-  ];
-
-  const handleProjectClick = (project) => {
-    setSelectedProject(project);
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-    setSelectedProject(null);
-  };
-
   return (
-    <Container maxWidth="xl" sx={{ py: 8, minHeight: '100vh' }}>
-      {/* Header Section */}
-      <Box sx={{ textAlign: 'center', mb: 8 }}>
-        <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', mb: 2, color: '#002e5b' }}>
-          AI Services & Solutions
-        </Typography>
-        <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto', lineHeight: 1.6 }}>
-          Harnessing the power of artificial intelligence to deliver innovative, enterprise-ready solutions that transform how businesses operate and interact with their customers.
-        </Typography>
-      </Box>
-
-      {/* PROPER GRID LAYOUT - 3 columns */}
-      <Grid 
-        container 
-        spacing={4} 
-        sx={{ 
-          display: 'grid',
-          gridTemplateColumns: { 
-            xs: '1fr', 
-            sm: 'repeat(2, 1fr)', 
-            md: 'repeat(3, 1fr)' 
-          },
-          gap: 4,
-          width: '100%',
-          margin: 0
+    <Box component="main" sx={{ bgcolor: colors.background }}>
+      {/* Hero */}
+      <Box
+        sx={{
+          py: { xs: 6, md: 9 },
+          background: gradients.hero,
+          borderBottom: `1px solid ${colors.border}`,
         }}
       >
-        {aiOfferings.map((project) => (
-          <Box 
-            key={project.id}
-            sx={{ 
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column'
+        <Container maxWidth="lg">
+          <Typography
+            component="h1"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: '2rem', md: '2.75rem' },
+              color: colors.dark,
+              letterSpacing: '-0.02em',
+              mb: 2,
+              lineHeight: 1.15,
             }}
           >
-            <Card 
-              sx={{ 
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                transition: 'all 0.3s ease-in-out',
-                cursor: 'pointer',
-                '&:hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: 6
-                }
-              }}
-              onClick={() => handleProjectClick(project)}
-            >
-              {/* Project Image */}
-              <CardMedia
-                component="img"
-                height="200"
-                image={project.image}
-                alt={project.title}
-                sx={{ 
-                  objectFit: 'cover',
-                  borderBottom: '2px solid',
-                  borderColor: 'divider'
-                }}
-                onError={(e) => {
-                  e.target.src = '/AI/ai.png';
-                }}
-              />
-              
-              {/* Project Content */}
-              <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                <Chip 
-                  label={project.category} 
-                  size="small" 
-                  sx={{ 
-                    mb: 2, 
-                    backgroundColor: '#002e5b', 
-                    color: 'white',
-                    fontSize: '0.75rem'
-                  }} 
-                />
-                
-                <Typography 
-                  variant="h5" 
-                  component="h3" 
-                  sx={{ 
-                    fontWeight: 'bold',
-                    mb: 2,
-                    color: '#002e5b',
-                    minHeight: '64px'
-                  }}
-                >
-                  {project.title}
-                </Typography>
-                
-                <Typography 
-                  variant="body2" 
-                  color="text.secondary"
-                  sx={{ 
-                    lineHeight: 1.6,
-                    mb: 2,
-                    display: '-webkit-box',
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: 'vertical',
-                    overflow: 'hidden'
-                  }}
-                >
-                  {project.description}
-                </Typography>
-                
-                <Button 
-                  variant="outlined" 
-                  fullWidth
-                  sx={{ 
-                    mt: 'auto',
-                    borderColor: '#002e5b',
-                    color: '#002e5b',
-                    '&:hover': {
-                      backgroundColor: '#002e5b',
-                      color: 'white'
-                    }
-                  }}
-                >
-                  View Details
-                </Button>
-              </CardContent>
-            </Card>
-          </Box>
-        ))}
-      </Grid>
+            Software Solutions &amp; App Development
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: '1.1rem', md: '1.35rem' },
+              color: colors.textMuted,
+              maxWidth: 720,
+              lineHeight: 1.7,
+            }}
+          >
+            Dedicated to providing smart software technology to leading companies worldwide.
+          </Typography>
+        </Container>
+      </Box>
 
-      {/* Project Details Dialog */}
-      <Dialog 
-        open={openDialog} 
-        onClose={handleCloseDialog} 
-        maxWidth="md" 
-        fullWidth
-        fullScreen={isMobile}
+      {/* Leading AI — prominent */}
+      <Box
+        sx={{
+          py: { xs: 4, md: 5 },
+          background: `linear-gradient(135deg, ${colors.dark} 0%, #1E3A5F 50%, ${colors.primaryDark} 100%)`,
+          position: 'relative',
+          overflow: 'hidden',
+        }}
       >
-        {selectedProject && (
-          <>
-            <DialogTitle sx={{ m: 0, p: 3, pb: 1 }}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#002e5b' }}>
-                  {selectedProject.title}
-                </Typography>
-                <IconButton onClick={handleCloseDialog}>
-                  <Close />
-                </IconButton>
-              </Box>
-              <Chip 
-                label={selectedProject.category} 
-                sx={{ 
-                  mt: 1,
-                  backgroundColor: '#002e5b', 
-                  color: 'white' 
-                }} 
-              />
-            </DialogTitle>
-            
-            <DialogContent sx={{ p: 3 }}>
-              <CardMedia
-                component="img"
-                height="250"
-                image={selectedProject.image}
-                alt={selectedProject.title}
-                sx={{ 
-                  objectFit: 'cover',
-                  borderRadius: 1,
-                  mb: 3
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            background: `radial-gradient(circle at 80% 20%, ${colors.secondary}30 0%, transparent 50%)`,
+            pointerEvents: 'none',
+          }}
+        />
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              alignItems: { xs: 'flex-start', md: 'center' },
+              gap: 3,
+            }}
+          >
+            <Box
+              sx={{
+                width: 64,
+                height: 64,
+                borderRadius: radius.card,
+                background: gradients.primary,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <AutoAwesome sx={{ fontSize: 36, color: '#fff' }} />
+            </Box>
+            <Box>
+              <Typography
+                component="h2"
+                sx={{
+                  fontWeight: 800,
+                  fontSize: { xs: '1.5rem', md: '2rem' },
+                  color: '#fff',
+                  letterSpacing: '-0.02em',
+                  mb: 1,
                 }}
-              />
-              
-              <Typography variant="body1" sx={{ lineHeight: 1.8, mb: 3 }}>
-                {selectedProject.description}
+              >
+                Leading AI Solution Providers
               </Typography>
-              
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <Typography variant="h6" sx={{ mb: 2, color: '#002e5b' }}>
-                    Key Features
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                    {selectedProject.features.map((feature, index) => (
-                      <Chip 
-                        key={index}
-                        label={feature} 
-                        sx={{ 
-                          backgroundColor: '#f0f7ff',
-                          color: '#002e5b'
-                        }} 
-                      />
-                    ))}
-                  </Box>
-                </Grid>
-                
-                <Grid item xs={12} md={6}>
-                  <Typography variant="h6" sx={{ mb: 2, color: '#002e5b' }}>
-                    Technologies Used
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                    {selectedProject.technologies.map((tech, index) => (
-                      <Chip 
-                        key={index}
-                        label={tech} 
-                        variant="outlined"
-                        sx={{ borderColor: '#002e5b', color: '#002e5b' }}
-                      />
-                    ))}
-                  </Box>
-                </Grid>
-              </Grid>
-            </DialogContent>
-            
-            <DialogActions sx={{ p: 3, pt: 1 }}>
-              <Button 
-                startIcon={<Launch />}
-                variant="contained"
-                sx={{ 
-                  backgroundColor: '#002e5b',
-                  '&:hover': { backgroundColor: '#00498a' }
+              <Typography
+                sx={{
+                  color: 'rgba(255,255,255,0.85)',
+                  fontSize: { xs: '1rem', md: '1.125rem' },
+                  lineHeight: 1.75,
+                  maxWidth: 800,
                 }}
               >
-                Live Demo
-              </Button>
-              <Button 
-                startIcon={<Code />}
-                variant="outlined"
-                sx={{ 
-                  borderColor: '#002e5b',
-                  color: '#002e5b'
+                We harness artificial intelligence for chatbots, automation, intelligent assistants, and
+                enterprise-ready AI that transforms how businesses operate and engage with customers.
+              </Typography>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+
+      {/* Global experience */}
+      <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: '#fff' }}>
+        <Container maxWidth="lg">
+          <Typography
+            component="h2"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: '1.75rem', md: '2.25rem' },
+              color: colors.dark,
+              textAlign: 'center',
+              mb: 2,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            Over 20 Years of Global Experience
+          </Typography>
+          <Typography
+            sx={{
+              textAlign: 'center',
+              color: colors.textMuted,
+              fontSize: { xs: '1rem', md: '1.125rem' },
+              lineHeight: 1.8,
+              maxWidth: 820,
+              mx: 'auto',
+              mb: { xs: 5, md: 6 },
+            }}
+          >
+            For over 20 years, we&apos;ve been delivering top-notch application development and software
+            outsourcing services to clients worldwide.
+          </Typography>
+
+          <Grid container spacing={3}>
+            {experienceStats.map((stat) => {
+              const Icon = stat.icon;
+              return (
+                <Grid key={stat.title} size={{ xs: 12, md: 4 }}>
+                  <Box
+                    sx={{
+                      p: { xs: 3, md: 4 },
+                      height: '100%',
+                      textAlign: 'center',
+                      borderRadius: radius.card,
+                      border: `1px solid ${colors.border}`,
+                      boxShadow: shadows.card,
+                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-4px)',
+                        boxShadow: shadows.cardHover,
+                      },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: 56,
+                        height: 56,
+                        mx: 'auto',
+                        mb: 2,
+                        borderRadius: '12px',
+                        background: gradients.primarySoft,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Icon sx={{ fontSize: 28, color: colors.primary }} />
+                    </Box>
+                    <Typography
+                      component="h3"
+                      sx={{ fontWeight: 700, fontSize: '1.125rem', color: colors.dark, mb: 1.5 }}
+                    >
+                      {stat.title}
+                    </Typography>
+                    <Typography sx={{ color: colors.textMuted, lineHeight: 1.7, fontSize: '0.9375rem' }}>
+                      {stat.description}
+                    </Typography>
+                  </Box>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Skills & expertise */}
+      <Box
+        sx={{
+          py: { xs: 6, md: 8 },
+          bgcolor: colors.background,
+          borderTop: `1px solid ${colors.border}`,
+        }}
+      >
+        <Container maxWidth="lg">
+          <Grid container spacing={5} alignItems="center">
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Typography
+                component="h2"
+                sx={{
+                  fontWeight: 800,
+                  fontSize: { xs: '1.75rem', md: '2.25rem' },
+                  color: colors.dark,
+                  mb: 3,
+                  letterSpacing: '-0.02em',
                 }}
               >
-                Source Code
-              </Button>
-            </DialogActions>
-          </>
-        )}
-      </Dialog>
-    </Container>
+                Our Skills &amp; Expertise
+              </Typography>
+              <Typography
+                sx={{
+                  color: colors.textMuted,
+                  fontSize: { xs: '1rem', md: '1.0625rem' },
+                  lineHeight: 1.85,
+                }}
+              >
+                We take great pride in our innovative ideas and decades of experience. However, what really
+                makes us unique is our commitment to addressing the requirements of every client. This
+                commitment drives us to collaborate closely with each client, ensuring the delivery of
+                customized solutions that meet their needs precisely. We believe that strong partnerships
+                with our clients is the secret to success, and we aim to exceed expectations in everything
+                we do.
+              </Typography>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Box
+                sx={{
+                  p: { xs: 3, md: 4 },
+                  bgcolor: '#fff',
+                  borderRadius: radius.card,
+                  border: `1px solid ${colors.border}`,
+                  boxShadow: shadows.card,
+                }}
+              >
+                {skillMetrics.map((skill) => (
+                  <Box key={skill.label} sx={{ mb: 3, '&:last-child': { mb: 0 } }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                      <Typography sx={{ fontWeight: 600, color: colors.dark, fontSize: '0.9375rem' }}>
+                        {skill.label}
+                      </Typography>
+                      <Typography sx={{ fontWeight: 700, color: colors.primary, fontSize: '0.9375rem' }}>
+                        {skill.value}%
+                      </Typography>
+                    </Box>
+                    <LinearProgress
+                      variant="determinate"
+                      value={skill.value}
+                      sx={{
+                        height: 8,
+                        borderRadius: 4,
+                        bgcolor: `${colors.primary}15`,
+                        '& .MuiLinearProgress-bar': {
+                          borderRadius: 4,
+                          background: gradients.primary,
+                        },
+                      }}
+                    />
+                  </Box>
+                ))}
+                <Box sx={{ display: 'flex', gap: 2, mt: 3, flexWrap: 'wrap' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Psychology sx={{ color: colors.secondary, fontSize: 22 }} />
+                    <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: colors.dark }}>
+                      AI &amp; Automation
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Handshake sx={{ color: colors.primary, fontSize: 22 }} />
+                    <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: colors.dark }}>
+                      Client Partnership
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </Box>
   );
 };
 

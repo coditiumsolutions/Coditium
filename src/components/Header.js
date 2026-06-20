@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  AppBar,
-  Toolbar,
   Box,
   Button,
   IconButton,
@@ -13,13 +11,22 @@ import {
   MenuItem,
   Avatar,
   Container,
+  Typography,
+  Link as MuiLink,
 } from '@mui/material';
 import { Menu as MenuIcon, Close, KeyboardArrowDown, Logout, AccountCircle } from '@mui/icons-material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import TopInfoBar from './TopInfoBar';
 import { colors, shadows, radius, gradients } from '../theme/designTokens';
 
 const MENU_CLOSE_DELAY_MS = 20;
+
+const TAB_ACTIVE_COLOR = '#9B1C31';
+const TAB_BAR_BORDER = '#6B7B8F';
+const TAB_BAR_BG = 'linear-gradient(180deg, #B8C5D6 0%, #A8B6C8 100%)';
+const TAB_INACTIVE_BG = '#ffc100';
+const TAB_ACTIVE_BG = '#ffc100';
+const TAB_INACTIVE_TEXT = '#1E293B';
+const TAB_ACTIVE_TEXT = '#1E293B';
 
 const navLinks = [
   { label: 'Home', path: '/' },
@@ -124,38 +131,36 @@ const Header = () => {
   const isSchoolNav = location.hash === '#school-solutions';
   const isProductsActive = isPropertyNav || isSchoolNav;
 
-  const navButtonSx = (active, highlight) => ({
-    color: active ? colors.primary : colors.dark,
-    fontWeight: active || highlight ? 700 : 500,
-    fontSize: '0.875rem',
-    px: 1.5,
-    py: 0.85,
-    minWidth: 'auto',
-    borderRadius: radius.button,
-    textTransform: 'none',
+  const tabSx = (active) => ({
+    flex: 1,
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 0.35,
+    minHeight: 36,
+    minWidth: 'unset',
+    m: 0,
+    px: { lg: 1.25, xl: 1.5 },
+    py: 0.75,
+    borderRadius: 0,
+    textTransform: 'uppercase',
+    fontWeight: 700,
+    fontSize: { lg: '0.68rem', xl: '0.72rem' },
+    letterSpacing: '0.05em',
+    lineHeight: 1.2,
+    whiteSpace: 'nowrap',
+    bgcolor: active ? TAB_ACTIVE_BG : TAB_INACTIVE_BG,
+    color: active ? TAB_ACTIVE_TEXT : TAB_INACTIVE_TEXT,
+    borderTop: active ? `3px solid ${TAB_ACTIVE_COLOR}` : '3px solid transparent',
+    borderBottom: active ? `1px solid ${TAB_ACTIVE_BG}` : 'none',
+    mb: active ? '-1px' : 0,
     position: 'relative',
-    transition: 'all 0.25s ease',
-    ...(highlight && {
-      background: `linear-gradient(135deg, ${colors.primary}12, ${colors.secondary}12)`,
-    }),
-    '&::before': active
-      ? {
-          content: '""',
-          position: 'absolute',
-          inset: 0,
-          borderRadius: radius.button,
-          padding: '1px',
-          background: gradients.primary,
-          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'xor',
-          maskComposite: 'exclude',
-          opacity: 0.5,
-        }
-      : {},
+    zIndex: active ? 1 : 0,
+    transition: 'background-color 0.2s ease, color 0.2s ease',
     '&:hover': {
-      color: colors.primary,
-      bgcolor: `${colors.primary}10`,
-      transform: 'translateY(-1px)',
+      bgcolor: '#e6ad00',
+      color: TAB_INACTIVE_TEXT,
     },
   });
 
@@ -207,86 +212,57 @@ const Header = () => {
   );
 
   return (
-    <Box sx={{ position: 'sticky', top: 0, zIndex: 1100 }}>
-      <TopInfoBar />
-      <AppBar
-        position="static"
-        elevation={0}
+    <Box
+      sx={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 1100,
+        boxShadow: scrolled ? shadows.header : 'none',
+        transition: 'box-shadow 0.35s ease',
+      }}
+    >
+      {/* Primary navbar — logo, contact, CTA */}
+      <Box
         sx={{
-          background: scrolled ? gradients.navGlass : '#FFFFFF',
-          backdropFilter: scrolled ? 'blur(16px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
-          borderBottom: `1px solid ${colors.border}`,
-          boxShadow: scrolled ? shadows.header : 'none',
-          transition: 'all 0.35s ease',
+          background: `linear-gradient(90deg, ${colors.dark} 0%, ${colors.darkMuted} 100%)`,
+          color: '#fff',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}
       >
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ minHeight: { xs: 68, md: 80 }, gap: 2, py: 0.5 }}>
-            <Box
-              component={Link}
-              to="/"
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 1.5,
-                flexShrink: 0,
-                textDecoration: 'none',
-                minWidth: 0,
-              }}
-            >
-              <Box
-                component="img"
-                src="/logo02.png"
-                alt="Coditium"
-                sx={{ height: { xs: 40, md: 48 }, width: 'auto', objectFit: 'contain' }}
-              />
-            </Box>
-
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: { xs: 1.5, md: 2 },
+              py: { xs: 1, md: 1.25 },
+              minHeight: { xs: 48, md: 56 },
+            }}
+          >
             <Box
               sx={{
-                display: { xs: 'none', lg: 'flex' },
+                display: { xs: 'none', md: 'flex' },
                 alignItems: 'center',
-                flex: 1,
-                justifyContent: 'center',
-                gap: 0.25,
+                gap: 2.5,
+                fontSize: '0.8125rem',
               }}
             >
-              {navLinks.map((link) => {
-                if (link.dropdown) {
-                  const isServices = link.dropdown === 'services';
-                  const dropdownActive = isServices ? isActive('/services') : isProductsActive;
-                  return (
-                    <Box
-                      key={link.label}
-                      onMouseEnter={(e) => openMenu(e, link.dropdown)}
-                      onMouseLeave={scheduleClose}
-                      sx={{ display: 'inline-flex' }}
-                    >
-                      <Button
-                        component={isServices ? Link : 'button'}
-                        to={isServices ? '/services' : undefined}
-                        endIcon={<KeyboardArrowDown sx={{ fontSize: '1.1rem !important' }} />}
-                        sx={navButtonSx(dropdownActive)}
-                      >
-                        {link.label}
-                      </Button>
-                      {renderDropdownMenu(link.dropdown)}
-                    </Box>
-                  );
-                }
-                return (
-                  <Button key={link.label} component={Link} to={link.path} sx={navButtonSx(isActive(link.path))}>
-                    {link.label}
-                  </Button>
-                );
-              })}
+              <Typography component="span" sx={{ fontWeight: 500, whiteSpace: 'nowrap' }}>
+                📞 +92 (333) 519-1392
+              </Typography>
+              <MuiLink
+                href="mailto:info@coditium.com"
+                sx={{ color: '#fff', textDecoration: 'none', fontWeight: 500, '&:hover': { opacity: 0.9 } }}
+              >
+                📧 info@coditium.com
+              </MuiLink>
             </Box>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 'auto' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               {adminUser && (
                 <>
-                  <IconButton onClick={(e) => setAdminAnchor(e.currentTarget)} sx={{ color: colors.dark }}>
+                  <IconButton onClick={(e) => setAdminAnchor(e.currentTarget)} sx={{ color: '#fff' }}>
                     <Avatar sx={{ width: 34, height: 34, bgcolor: colors.primary, fontSize: '0.875rem' }}>
                       {adminUser.username.charAt(0).toUpperCase()}
                     </Avatar>
@@ -314,28 +290,90 @@ const Header = () => {
                 to="/contact"
                 sx={{
                   display: { xs: 'none', sm: 'inline-flex' },
-                  background: gradients.primary,
+                  bgcolor: '#fff',
+                  color: colors.primary,
                   fontWeight: 700,
+                  fontSize: '0.8125rem',
                   borderRadius: radius.button,
-                  px: 2.5,
+                  px: 2,
+                  py: 0.6,
                   textTransform: 'none',
-                  boxShadow: '0 4px 16px rgba(37,99,235,0.35)',
-                  '&:hover': { filter: 'brightness(1.06)' },
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                  '&:hover': { bgcolor: '#F0F9FF' },
                 }}
               >
                 Get a Quote
               </Button>
               <IconButton
-                sx={{ display: { lg: 'none' }, color: colors.dark }}
+                sx={{ display: { lg: 'none' }, color: '#fff' }}
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
               >
                 <MenuIcon />
               </IconButton>
             </Box>
-          </Toolbar>
+          </Box>
         </Container>
-      </AppBar>
+      </Box>
+
+      {/* Tab navigation — full width */}
+      <Box sx={{ display: { xs: 'none', lg: 'block' }, bgcolor: '#fff', width: '100%' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'stretch',
+            width: '100%',
+            m: 0,
+            p: 0,
+            borderTop: `1px solid ${TAB_BAR_BORDER}`,
+            borderBottom: `1px solid ${TAB_BAR_BORDER}`,
+            borderLeft: `1px solid ${TAB_BAR_BORDER}`,
+            borderRight: `1px solid ${TAB_BAR_BORDER}`,
+            background: TAB_BAR_BG,
+          }}
+        >
+            {navLinks.map((link, index) => {
+              const isLast = index === navLinks.length - 1;
+              const cellSx = {
+                flex: 1,
+                display: 'flex',
+                borderRight: isLast ? 'none' : `1px solid ${TAB_BAR_BORDER}`,
+              };
+
+              if (link.dropdown) {
+                const isServices = link.dropdown === 'services';
+                const dropdownActive = isServices ? isActive('/services') : isProductsActive;
+                return (
+                  <Box
+                    key={link.label}
+                    sx={cellSx}
+                    onMouseEnter={(e) => openMenu(e, link.dropdown)}
+                    onMouseLeave={scheduleClose}
+                  >
+                    <Button
+                      component={isServices ? Link : 'button'}
+                      to={isServices ? '/services' : undefined}
+                      endIcon={<KeyboardArrowDown sx={{ fontSize: '0.95rem !important' }} />}
+                      sx={tabSx(dropdownActive)}
+                    >
+                      {link.label}
+                    </Button>
+                    {renderDropdownMenu(link.dropdown)}
+                  </Box>
+                );
+              }
+
+              return (
+                <Box key={link.label} sx={cellSx}>
+                  <Button component={Link} to={link.path} sx={tabSx(isActive(link.path))}>
+                    {link.label}
+                  </Button>
+                </Box>
+              );
+            })}
+        </Box>
+      </Box>
 
       <Drawer anchor="right" open={mobileOpen} onClose={() => setMobileOpen(false)} PaperProps={{ sx: { width: 300, p: 2 } }}>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>

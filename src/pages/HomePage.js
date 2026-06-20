@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import HomeHeroBanner from '../components/home/HomeHeroBanner';
 import HomeSolutionSlider from '../components/home/HomeSolutionSlider';
 import HomeApplicationGrid from '../components/home/HomeApplicationGrid';
-import HomeHero from '../components/home/HomeHero';
 import HomeTrust from '../components/home/HomeTrust';
 import HomePropertyShowcase from '../components/home/HomePropertyShowcase';
 import HomeSchoolShowcase from '../components/home/HomeSchoolShowcase';
 import HomeWhyChoose from '../components/home/HomeWhyChoose';
-import HomeTechnologies from '../components/home/HomeTechnologies';
-import HomeProcess from '../components/home/HomeProcess';
 import HomePortfolio from '../components/home/HomePortfolio';
 import HomeCTA from '../components/home/HomeCTA';
 import LogoMarquee from '../components/LogoMarquee';
@@ -31,15 +29,13 @@ const HomePage = () => {
 
   return (
     <Box component="main" sx={{ bgcolor: colors.background }}>
+      <HomeHeroBanner />
       <HomeSolutionSlider />
       <HomeApplicationGrid />
-      <HomeHero />
       <HomeTrust />
       <HomePropertyShowcase />
       <HomeSchoolShowcase />
       <HomeWhyChoose />
-      <HomeTechnologies />
-      <HomeProcess />
       <HomePortfolio />
       <Box sx={{ py: 4, bgcolor: '#fff' }}>
         <LogoMarquee />

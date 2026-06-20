@@ -29,8 +29,8 @@ import {
   Business,
   Description,
   Person,
-  Delete
 } from '@mui/icons-material';
+import { colors, radius, shadows } from '../theme/designTokens';
 
 const PortfolioPage = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -181,6 +181,29 @@ const PortfolioPage = () => {
       handleCloseDialog();
     }
   };
+
+  const cardSx = (isSelected) => ({
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    cursor: 'pointer',
+    bgcolor: isSelected ? '#DBEAFE' : '#F1F5F9',
+    border: `1px solid ${isSelected ? colors.primary : colors.border}`,
+    borderRadius: radius.card,
+    boxShadow: isSelected ? shadows.cardHover : shadows.card,
+    transition: 'all 0.25s ease-in-out',
+    '&:hover': {
+      transform: 'translateY(-6px)',
+      bgcolor: '#E0E7FF',
+      borderColor: colors.primary,
+      boxShadow: shadows.cardHover,
+    },
+    '&:active': {
+      transform: 'translateY(-2px)',
+      bgcolor: '#BFDBFE',
+      borderColor: colors.primaryDark,
+    },
+  });
 
   const textFieldStyle = {
     width: '100%',
@@ -438,21 +461,29 @@ const PortfolioPage = () => {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ py: 8, minHeight: '100vh' }}>
+    <Container maxWidth="xl" sx={{ py: { xs: 2.5, md: 3 }, minHeight: 'auto' }}>
       {/* Header Section */}
-      <Box sx={{ textAlign: 'center', mb: 8 }}>
-        <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', mb: 2, color: '#002e5b' }}>
+      <Box sx={{ textAlign: 'center', mb: { xs: 2.5, md: 3 } }}>
+        <Typography
+          variant="h3"
+          component="h1"
+          sx={{ fontWeight: 'bold', mb: 1, color: '#002e5b', fontSize: { xs: '1.75rem', md: '2rem' } }}
+        >
           Coditium Portfolio
         </Typography>
-        <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto', lineHeight: 1.6 }}>
+        <Typography
+          variant="h6"
+          color="text.secondary"
+          sx={{ maxWidth: 720, mx: 'auto', lineHeight: 1.5, fontSize: { xs: '0.9rem', md: '1rem' } }}
+        >
           Explore our latest projects and innovative solutions across various industries. 
         </Typography>
       </Box>
 
-      {/* PROPER GRID LAYOUT - 3 columns */}
+      {/* Grid */}
       <Grid 
         container 
-        spacing={4} 
+        spacing={2} 
         sx={{ 
           display: 'grid',
           gridTemplateColumns: { 
@@ -460,8 +491,7 @@ const PortfolioPage = () => {
             sm: 'repeat(2, 1fr)', 
             md: 'repeat(3, 1fr)' 
           },
-          gap: 4,
-          // Remove default Material-UI grid spacing
+          gap: { xs: 2, md: 2.5 },
           width: '100%',
           margin: 0
         }}
@@ -477,23 +507,13 @@ const PortfolioPage = () => {
             }}
           >
             <Card 
-              sx={{ 
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                transition: 'all 0.3s ease-in-out',
-                cursor: 'pointer',
-                '&:hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: 6
-                }
-              }}
+              sx={cardSx(openDialog && selectedProject?.id === project.id)}
               onClick={() => handleProjectClick(project)}
             >
               {/* Project Image */}
               <CardMedia
                 component="img"
-                height="200"
+                height="140"
                 image={project.image}
                 alt={project.title}
                 sx={{ 
@@ -507,15 +527,16 @@ const PortfolioPage = () => {
               />
               
               {/* Project Content */}
-              <CardContent sx={{ flexGrow: 1, p: 3 }}>
+              <CardContent sx={{ flexGrow: 1, p: 2, bgcolor: 'transparent' }}>
                 <Chip 
                   label={project.category} 
                   size="small" 
                   sx={{ 
-                    mb: 2, 
+                    mb: 1, 
                     backgroundColor: '#002e5b', 
                     color: 'white',
-                    fontSize: '0.75rem'
+                    fontSize: '0.7rem',
+                    height: 22,
                   }} 
                 />
                 
@@ -524,9 +545,10 @@ const PortfolioPage = () => {
                   component="h3" 
                   sx={{ 
                     fontWeight: 'bold',
-                    mb: 2,
+                    mb: 1,
                     color: '#002e5b',
-                    minHeight: '64px'
+                    fontSize: { xs: '1rem', md: '1.1rem' },
+                    lineHeight: 1.3,
                   }}
                 >
                   {project.title}
@@ -536,10 +558,11 @@ const PortfolioPage = () => {
                   variant="body2" 
                   color="text.secondary"
                   sx={{ 
-                    lineHeight: 1.6,
-                    mb: 2,
+                    lineHeight: 1.5,
+                    mb: 1.5,
+                    fontSize: '0.8125rem',
                     display: '-webkit-box',
-                    WebkitLineClamp: 3,
+                    WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
                     overflow: 'hidden'
                   }}
@@ -550,14 +573,23 @@ const PortfolioPage = () => {
                 <Button 
                   variant="outlined" 
                   fullWidth
+                  size="small"
                   sx={{ 
                     mt: 'auto',
-                    borderColor: '#002e5b',
-                    color: '#002e5b',
+                    py: 0.75,
+                    fontSize: '0.8125rem',
+                    borderColor: colors.primary,
+                    color: colors.primary,
+                    bgcolor: 'rgba(37, 99, 235, 0.06)',
                     '&:hover': {
-                      backgroundColor: '#002e5b',
-                      color: 'white'
-                    }
+                      backgroundColor: colors.primary,
+                      color: '#fff',
+                      borderColor: colors.primary,
+                    },
+                    '&:active': {
+                      backgroundColor: colors.primaryDark,
+                      borderColor: colors.primaryDark,
+                    },
                   }}
                 >
                   View Details
@@ -575,6 +607,13 @@ const PortfolioPage = () => {
         maxWidth={selectedProject && selectedProject.id === 1 ? 'lg' : 'md'} 
         fullWidth
         fullScreen={isMobile}
+        PaperProps={{
+          sx: {
+            bgcolor: '#F1F5F9',
+            border: `1px solid ${colors.border}`,
+            boxShadow: shadows.cardHover,
+          },
+        }}
       >
         {renderProjectDialogContent()}
       </Dialog>

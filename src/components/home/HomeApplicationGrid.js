@@ -29,16 +29,6 @@ const HomeApplicationGrid = () => (
         >
           Technologies We Work With
         </Typography>
-        <Typography
-          sx={{
-            color: colors.textMuted,
-            fontSize: { xs: '0.95rem', md: '1.05rem' },
-            maxWidth: 640,
-            mx: 'auto',
-          }}
-        >
-          Modern frameworks, platforms, and tools we use to build reliable software solutions.
-        </Typography>
       </AnimateSection>
 
       <AnimateSection>

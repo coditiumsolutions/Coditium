@@ -46,7 +46,6 @@ const HomeWhyChoose = () => (
           light
           eyebrow="Why Coditium"
           title="Why Businesses Choose Coditium Solutions"
-          subtitle="Pakistan's experienced software partner for property, education, and enterprise applications."
         />
       </AnimateSection>
       <Grid container spacing={3}>

@@ -92,32 +92,32 @@ const ContactPage = () => {
 
   return (
     <div style={{
-      minHeight: '100vh',
+      minHeight: 'auto',
       backgroundColor: '#f8fafc',
-      paddingTop: '4rem',
-      paddingBottom: '4rem'
+      paddingTop: '1.5rem',
+      paddingBottom: '2rem'
     }}>
       <Container maxWidth="lg">
-        {/* Modern Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
-            width: '80px',
-            height: '80px',
+            width: '48px',
+            height: '48px',
             borderRadius: '50%',
             backgroundColor: 'rgba(79, 195, 247, 0.1)',
-            marginBottom: '1.5rem'
+            marginBottom: '0.75rem'
           }}>
-            <Message style={{ fontSize: '40px', color: '#4fc3f7' }} />
+            <Message style={{ fontSize: '26px', color: '#4fc3f7' }} />
           </div>
           
           <Typography variant="h2" style={{
             fontWeight: '800',
-            marginBottom: '1rem',
+            marginBottom: '0.5rem',
             color: '#002e5b',
-            fontSize: '3rem',
+            fontSize: '2rem',
             background: 'linear-gradient(135deg, #002e5b 0%, #4fc3f7 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -130,135 +130,134 @@ const ContactPage = () => {
             color: '#64748b',
             maxWidth: '500px',
             margin: '0 auto',
-            lineHeight: 1.6,
-            fontSize: '1.1rem'
+            lineHeight: 1.5,
+            fontSize: '0.95rem'
           }}>
             Have a project in mind? Reach out and let's create something amazing together
           </Typography>
         </div>
 
         {/* Main Content Grid */}
-        <div style={{ 
+        <div className="contact-grid" style={{ 
           display: 'grid', 
           gridTemplateColumns: '1fr 1fr',
-          gap: '3rem',
-          marginBottom: '4rem'
+          gap: '1.25rem',
         }}>
           {/* Contact Information Side */}
           <div>
             {/* Info Card */}
             <div style={{
               backgroundColor: 'white',
-              borderRadius: '20px',
-              padding: '2.5rem',
-              boxShadow: '0 8px 32px rgba(0, 46, 91, 0.08)',
+              borderRadius: '14px',
+              padding: '1.25rem',
+              boxShadow: '0 4px 20px rgba(0, 46, 91, 0.06)',
               height: '100%'
             }}>
               <Typography variant="h4" style={{
                 fontWeight: '700',
-                marginBottom: '2rem',
+                marginBottom: '1rem',
                 color: '#002e5b',
-                fontSize: '1.75rem'
+                fontSize: '1.25rem'
               }}>
                 Get in Touch
               </Typography>
 
               {/* Contact Items */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
                 {/* Email */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    width: '50px',
-                    height: '50px',
-                    borderRadius: '12px',
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
                     backgroundColor: 'rgba(79, 195, 247, 0.1)',
                     flexShrink: 0
                   }}>
-                    <Email style={{ fontSize: '24px', color: '#4fc3f7' }} />
+                    <Email style={{ fontSize: '20px', color: '#4fc3f7' }} />
                   </div>
                   <div>
-                    <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '0.25rem', color: '#002e5b' }}>
+                    <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '0.1rem', color: '#002e5b', fontSize: '0.9rem' }}>
                       Email
                     </Typography>
-                    <Typography variant="body1" style={{ color: '#64748b' }}>
+                    <Typography variant="body1" style={{ color: '#64748b', fontSize: '0.875rem' }}>
                       info@Coditium.com
                     </Typography>
                   </div>
                 </div>
 
                 {/* Phone */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    width: '50px',
-                    height: '50px',
-                    borderRadius: '12px',
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
                     backgroundColor: 'rgba(79, 195, 247, 0.1)',
                     flexShrink: 0
                   }}>
-                    <Phone style={{ fontSize: '24px', color: '#4fc3f7' }} />
+                    <Phone style={{ fontSize: '20px', color: '#4fc3f7' }} />
                   </div>
                   <div>
-                    <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '0.25rem', color: '#002e5b' }}>
+                    <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '0.1rem', color: '#002e5b', fontSize: '0.9rem' }}>
                       Phone
                     </Typography>
-                    <Typography variant="body1" style={{ color: '#64748b' }}>
+                    <Typography variant="body1" style={{ color: '#64748b', fontSize: '0.875rem' }}>
                       +92 (333) 519-1392
                     </Typography>
                   </div>
                 </div>
 
                 {/* Address */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    width: '50px',
-                    height: '50px',
-                    borderRadius: '12px',
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
                     backgroundColor: 'rgba(79, 195, 247, 0.1)',
                     flexShrink: 0
                   }}>
-                    <LocationOn style={{ fontSize: '24px', color: '#4fc3f7' }} />
+                    <LocationOn style={{ fontSize: '20px', color: '#4fc3f7' }} />
                   </div>
                   <div>
-                    <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '0.25rem', color: '#002e5b' }}>
+                    <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '0.1rem', color: '#002e5b', fontSize: '0.9rem' }}>
                       Address
                     </Typography>
-                    <Typography variant="body1" style={{ color: '#64748b' }}>
+                    <Typography variant="body1" style={{ color: '#64748b', fontSize: '0.875rem' }}>
                       Bahria Town, Karachi, Pakistan
                     </Typography>
                   </div>
                 </div>
 
                 {/* Hours */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    width: '50px',
-                    height: '50px',
-                    borderRadius: '12px',
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
                     backgroundColor: 'rgba(79, 195, 247, 0.1)',
                     flexShrink: 0
                   }}>
-                    <AccessTime style={{ fontSize: '24px', color: '#4fc3f7' }} />
+                    <AccessTime style={{ fontSize: '20px', color: '#4fc3f7' }} />
                   </div>
                   <div>
-                    <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '0.25rem', color: '#002e5b' }}>
+                    <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '0.1rem', color: '#002e5b', fontSize: '0.9rem' }}>
                       Business Hours
                     </Typography>
-                    <Typography variant="body1" style={{ color: '#64748b' }}>
+                    <Typography variant="body1" style={{ color: '#64748b', fontSize: '0.875rem' }}>
                       Mon-Fri: 9AM-6PM
                     </Typography>
-                    <Typography variant="body1" style={{ color: '#64748b' }}>
+                    <Typography variant="body1" style={{ color: '#64748b', fontSize: '0.875rem' }}>
                       Sat: 10AM-4PM
                     </Typography>
                   </div>
@@ -266,11 +265,11 @@ const ContactPage = () => {
               </div>
 
               {/* Benefits List */}
-              <div style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px solid #e2e8f0' }}>
-                <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '1rem', color: '#002e5b' }}>
+              <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0' }}>
+                <Typography variant="h6" style={{ fontWeight: '600', marginBottom: '0.5rem', color: '#002e5b', fontSize: '0.95rem' }}>
                   Why Choose Us?
                 </Typography>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   {[
                     '24/7 Customer Support',
                     'Quick Response Time',
@@ -278,8 +277,8 @@ const ContactPage = () => {
                     'Project Follow-up'
                   ].map((item, index) => (
                     <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <CheckCircle style={{ fontSize: '18px', color: '#4fc3f7' }} />
-                      <Typography variant="body2" style={{ color: '#64748b' }}>
+                      <CheckCircle style={{ fontSize: '16px', color: '#4fc3f7' }} />
+                      <Typography variant="body2" style={{ color: '#64748b', fontSize: '0.8125rem' }}>
                         {item}
                       </Typography>
                     </div>
@@ -293,26 +292,26 @@ const ContactPage = () => {
           <div>
             <div style={{
               backgroundColor: 'white',
-              borderRadius: '20px',
-              padding: '2.5rem',
-              boxShadow: '0 8px 32px rgba(0, 46, 91, 0.08)'
+              borderRadius: '14px',
+              padding: '1.25rem',
+              boxShadow: '0 4px 20px rgba(0, 46, 91, 0.06)'
             }}>
               <Typography variant="h4" style={{
                 fontWeight: '700',
-                marginBottom: '0.5rem',
+                marginBottom: '0.25rem',
                 color: '#002e5b',
-                fontSize: '1.75rem'
+                fontSize: '1.25rem'
               }}>
                 Send a Message
               </Typography>
-              <Typography variant="body1" style={{ color: '#64748b', marginBottom: '2rem' }}>
+              <Typography variant="body1" style={{ color: '#64748b', marginBottom: '1rem', fontSize: '0.875rem' }}>
                 Fill out the form below and we'll respond within 24 hours
               </Typography>
 
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.875rem' }}>
                   <div>
-                    <Typography variant="subtitle2" style={{ fontWeight: '600', marginBottom: '0.5rem', color: '#002e5b' }}>
+                    <Typography variant="subtitle2" style={{ fontWeight: '600', marginBottom: '0.35rem', color: '#002e5b', fontSize: '0.8125rem' }}>
                       Your Name *
                     </Typography>
                     <div style={{ position: 'relative' }}>
@@ -333,10 +332,10 @@ const ContactPage = () => {
                         placeholder="Enter your name"
                         style={{
                           width: '100%',
-                          padding: '12px 12px 12px 40px',
+                          padding: '9px 12px 9px 36px',
                           border: '1px solid #e2e8f0',
-                          borderRadius: '10px',
-                          fontSize: '1rem',
+                          borderRadius: '8px',
+                          fontSize: '0.9rem',
                           transition: 'all 0.3s ease',
                           backgroundColor: '#f8fafc'
                         }}
@@ -355,7 +354,7 @@ const ContactPage = () => {
                   </div>
 
                   <div>
-                    <Typography variant="subtitle2" style={{ fontWeight: '600', marginBottom: '0.5rem', color: '#002e5b' }}>
+                    <Typography variant="subtitle2" style={{ fontWeight: '600', marginBottom: '0.35rem', color: '#002e5b', fontSize: '0.8125rem' }}>
                       Your Email *
                     </Typography>
                     <div style={{ position: 'relative' }}>
@@ -376,10 +375,10 @@ const ContactPage = () => {
                         placeholder="Enter your email"
                         style={{
                           width: '100%',
-                          padding: '12px 12px 12px 40px',
+                          padding: '9px 12px 9px 36px',
                           border: '1px solid #e2e8f0',
-                          borderRadius: '10px',
-                          fontSize: '1rem',
+                          borderRadius: '8px',
+                          fontSize: '0.9rem',
                           transition: 'all 0.3s ease',
                           backgroundColor: '#f8fafc'
                         }}
@@ -420,10 +419,10 @@ const ContactPage = () => {
                       placeholder="What is this regarding?"
                       style={{
                         width: '100%',
-                        padding: '12px 12px 12px 40px',
+                        padding: '9px 12px 9px 36px',
                         border: '1px solid #e2e8f0',
-                        borderRadius: '10px',
-                        fontSize: '1rem',
+                        borderRadius: '8px',
+                        fontSize: '0.9rem',
                         transition: 'all 0.3s ease',
                         backgroundColor: '#f8fafc'
                       }}
@@ -459,13 +458,13 @@ const ContactPage = () => {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Tell us about your project..."
-                      rows="6"
+                      rows="4"
                       style={{
                         width: '100%',
-                        padding: '12px 12px 12px 40px',
+                        padding: '9px 12px 9px 36px',
                         border: '1px solid #e2e8f0',
-                        borderRadius: '10px',
-                        fontSize: '1rem',
+                        borderRadius: '8px',
+                        fontSize: '0.9rem',
                         transition: 'all 0.3s ease',
                         backgroundColor: '#f8fafc',
                         resize: 'vertical',
@@ -488,17 +487,17 @@ const ContactPage = () => {
                 <Button
                   type="submit"
                   variant="contained"
-                  size="large"
+                  size="medium"
                   endIcon={<Send />}
                   style={{
                     backgroundColor: '#002e5b',
                     color: 'white',
                     fontWeight: '600',
-                    fontSize: '1rem',
-                    padding: '14px 32px',
-                    borderRadius: '10px',
+                    fontSize: '0.9rem',
+                    padding: '10px 24px',
+                    borderRadius: '8px',
                     textTransform: 'none',
-                    marginTop: '1rem',
+                    marginTop: '0.25rem',
                     transition: 'all 0.3s ease',
                     alignSelf: 'flex-start'
                   }}
@@ -522,48 +521,48 @@ const ContactPage = () => {
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '1rem',
-              marginTop: '2rem'
+              gap: '0.75rem',
+              marginTop: '0.75rem'
             }}>
               <div style={{
                 backgroundColor: 'white',
-                borderRadius: '12px',
-                padding: '1.5rem',
+                borderRadius: '10px',
+                padding: '0.75rem',
                 textAlign: 'center',
-                boxShadow: '0 4px 12px rgba(0, 46, 91, 0.05)'
+                boxShadow: '0 2px 8px rgba(0, 46, 91, 0.05)'
               }}>
-                <Typography variant="h5" style={{ fontWeight: '700', color: '#002e5b' }}>
+                <Typography variant="h5" style={{ fontWeight: '700', color: '#002e5b', fontSize: '1.1rem' }}>
                   &lt; 24h
                 </Typography>
-                <Typography variant="body2" style={{ color: '#64748b' }}>
+                <Typography variant="body2" style={{ color: '#64748b', fontSize: '0.75rem' }}>
                   Response Time
                 </Typography>
               </div>
               <div style={{
                 backgroundColor: 'white',
-                borderRadius: '12px',
-                padding: '1.5rem',
+                borderRadius: '10px',
+                padding: '0.75rem',
                 textAlign: 'center',
-                boxShadow: '0 4px 12px rgba(0, 46, 91, 0.05)'
+                boxShadow: '0 2px 8px rgba(0, 46, 91, 0.05)'
               }}>
-                <Typography variant="h5" style={{ fontWeight: '700', color: '#002e5b' }}>
+                <Typography variant="h5" style={{ fontWeight: '700', color: '#002e5b', fontSize: '1.1rem' }}>
                   100%
                 </Typography>
-                <Typography variant="body2" style={{ color: '#64748b' }}>
+                <Typography variant="body2" style={{ color: '#64748b', fontSize: '0.75rem' }}>
                   Satisfaction
                 </Typography>
               </div>
               <div style={{
                 backgroundColor: 'white',
-                borderRadius: '12px',
-                padding: '1.5rem',
+                borderRadius: '10px',
+                padding: '0.75rem',
                 textAlign: 'center',
-                boxShadow: '0 4px 12px rgba(0, 46, 91, 0.05)'
+                boxShadow: '0 2px 8px rgba(0, 46, 91, 0.05)'
               }}>
-                <Typography variant="h5" style={{ fontWeight: '700', color: '#002e5b' }}>
+                <Typography variant="h5" style={{ fontWeight: '700', color: '#002e5b', fontSize: '1.1rem' }}>
                   50+
                 </Typography>
-                <Typography variant="body2" style={{ color: '#64748b' }}>
+                <Typography variant="body2" style={{ color: '#64748b', fontSize: '0.75rem' }}>
                   Happy Clients
                 </Typography>
               </div>
@@ -577,7 +576,7 @@ const ContactPage = () => {
       {/* Responsive CSS */}
       <style>{`
         @media (max-width: 900px) {
-          .main-grid {
+          .contact-grid {
             grid-template-columns: 1fr !important;
           }
           
